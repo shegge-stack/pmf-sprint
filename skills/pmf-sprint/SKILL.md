@@ -736,7 +736,7 @@ Run the full engine:
 
 1. **Sean Ellis survey** — "How would you feel if you could no longer use [product]?" Target: 40%+ "very disappointed"
 2. **Segment responses** — Find the cohort where "very disappointed" is highest. That's your real ICP.
-3. **The Narrowing Move** — Vohra went 22% → 32% by changing who he measured, zero product changes.
+3. **The Narrowing Move** — In Vohra's published account of building Superhuman, he described improving his PMF score from 22% to 32% by narrowing who he measured — zero product changes. The principle: segment first, build second.
 4. **Improvement loop** — "Somewhat disappointed" users see value but something's blocking them. Fix that.
 
 ### Output: Measurement Plan
@@ -829,7 +829,20 @@ Tell the founder:
 - **Be honest about gaps.** "You don't have differentiation yet" is more useful than a polite 2x2.
 - **Adapt, don't lecture.** An Optimizer doesn't need the Sean Ellis concept explained. An Explorer does.
 
-## Framework Sources
-- Foundation Sprint: Jake Knapp & John Zeratsky (Character Capital)
-- Design Sprint: Jake Knapp & John Zeratsky
-- PMF Engine: Rahul Vohra (Superhuman) — Sean Ellis survey + systematic PMF measurement
+## Disclaimer & Attribution
+
+This tool is an independent synthesis inspired by publicly available frameworks. It is **not affiliated with, endorsed by, or officially connected to** any of the following people or organizations.
+
+### Framework Credits & Sources
+
+- **Foundation Sprint & Design Sprint** — Created by Jake Knapp & John Zeratsky. The concepts of the "Founding Hypothesis," "Loserville" positioning, differentiator scales, and the structured sprint format originate from their published guides at Character Capital (character.vc). Their frameworks are freely shared and designed for practitioners to use.
+- **PMF Engine** — The systematic approach to measuring product-market fit using the Sean Ellis survey, the 40% benchmark, the three follow-up questions, and the segment-and-narrow methodology are synthesized from Rahul Vohra's published writings, including his First Round Review article "How Superhuman Built an Engine to Find Product/Market Fit" and his Substack newsletter. The specific anecdotes and benchmarks referenced in this tool come from those public sources.
+- **Sean Ellis Test** — The original "How would you feel if you could no longer use this product?" survey question and the 40% "very disappointed" benchmark were created by Sean Ellis and published on his blog and in his book *Hacking Growth*.
+
+### What's original to this tool
+
+The adaptive triage system (Explorer / Validator-Explore / Validator-Narrow / Optimizer tracks), the market comparison framework for early-stage founders with unclear ICP, the HTML report generation, and the conversational coaching format are original to this plugin. The underlying strategic frameworks belong to their respective creators.
+
+### License note
+
+The frameworks referenced above are publicly taught methodologies intended for broad use. This tool synthesizes them into an interactive format with original additions. If any framework creator has concerns, please open an issue on this repository.
