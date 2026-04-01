@@ -105,7 +105,7 @@ Three components (all tracks):
 Rules:
 - "AI" is not an advantage. What's your *specific* AI advantage?
 - "First mover" is almost never real. Push back.
-- Validator-Explore: pay special attention to capability — which markets does this capability transfer to? A team that can build coding agents might also be able to build compliance agents, QA agents, or data pipeline agents. The capability defines the opportunity space.
+- Validator-Explore: pay special attention to capability — ask "what other markets could this capability serve?" but do NOT suggest specific markets. Let the founder generate the list. The capability defines the opportunity space, but the founder needs to see the connections themselves.
 
 ### 1.4 Competitors
 
@@ -141,7 +141,7 @@ This is the most important phase for a Validator-Explore founder. Before narrowi
 
 Ask: **"Your product's core capability is [capability from Phase 1]. What are all the markets or customer segments that could use this? Let's brainstorm — include your current customers' market AND any others you've considered or been told about."**
 
-Push for 3-6 specific segments. Not "enterprise" — that's a size, not a market. Specific verticals or use cases: "B2B SaaS companies automating customer onboarding," "healthcare compliance teams managing audit prep," "FinServ ops teams reconciling transactions."
+Push for 3-6 specific segments. Let the founder generate the list — do NOT suggest specific industries or verticals. If their answers are too vague, push for specificity: a vertical, a role, and a use case. "Enterprise" is a size, not a market — push until each segment is specific enough to have a named person inside it (e.g., a good answer sounds like "[vertical] [role] doing [specific task]"). Only refine their framing after they've given their first answer.
 
 If they struggle, prompt with:
 - "Who else has the same underlying problem but in a different industry?"
