@@ -1,6 +1,10 @@
 # PMF Sprint
 
-A Claude Code plugin that runs a structured product-market fit sprint — 5 phases, 40 questions. Based on Foundation & Design Sprint (Knapp & Zeratsky) and the Rahul Vohra PMF Engine.
+A Claude Code plugin that runs a structured product-market fit validation sprint. Combines three proven frameworks:
+
+1. **Foundation Sprint** (Jake Knapp & John Zeratsky) — Founding Hypothesis + differentiation
+2. **Design Sprint** (Knapp & Zeratsky) — Prototype-and-test cycle
+3. **Vohra PMF Engine** (Rahul Vohra, Superhuman) — Sean Ellis survey + systematic PMF measurement
 
 ## Install
 
@@ -11,19 +15,19 @@ A Claude Code plugin that runs a structured product-market fit sprint — 5 phas
 ## Usage
 
 ```
-/pmf-sprint
+/pmf-sprint:pmf-sprint
 ```
 
-Claude will guide you through:
+## What it does
+
+Guides a founder through 7 phases in a 2-3 hour interactive session:
 
 1. **The Basics** — Target customer, problem, advantage, competition
 2. **Differentiation** — Scale ratings, 2x2 positioning, decision principles
-3. **Founding Hypothesis** — Your one-sentence bet
-4. **PMF Measurement** — Sean Ellis test, narrowing move, measurement plan
-5. **Action Plan** — Tomorrow, this week, next week
+3. **Founding Hypothesis** — Your one-sentence bet + scorecard
+4. **PMF Measurement** — Sean Ellis test, narrowing move, improvement loop
+5. **Magic Lenses** — Visual 2x2 charts comparing approaches through Customer, Pragmatic, Growth, and Money lenses (generates interactive HTML)
+6. **Action Plan** — Concrete next actions for tomorrow, this week, and next week
+7. **Save Artifacts** — Exports a PMF Sprint doc (.md) and Magic Lenses visualization (.html)
 
-At the end you get a structured sprint summary with a hypothesis scorecard and action plan.
-
-## Who is this for
-
-Founders and product teams who want to pressure-test their product-market fit assumptions in a single focused session.
+The facilitator is direct and opinionated — it pushes back on vague answers, flags untested assumptions, and won't let you skip customer conversations.
