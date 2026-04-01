@@ -1,10 +1,11 @@
 # PMF Sprint
 
-A Claude Code plugin that runs a structured product-market fit validation sprint. Combines three proven frameworks:
+A Claude Code plugin that runs an adaptive product-market fit validation sprint. Adapts to your stage — whether you have 0 customers or 100.
 
-1. **Foundation Sprint** (Jake Knapp & John Zeratsky) — Founding Hypothesis + differentiation
-2. **Design Sprint** (Knapp & Zeratsky) — Prototype-and-test cycle
-3. **Vohra PMF Engine** (Rahul Vohra, Superhuman) — Sean Ellis survey + systematic PMF measurement
+Combines three frameworks:
+- **Foundation Sprint** (Jake Knapp & John Zeratsky)
+- **Design Sprint** (Knapp & Zeratsky)
+- **Vohra PMF Engine** (Rahul Vohra, Superhuman)
 
 ## Install
 
@@ -18,16 +19,21 @@ A Claude Code plugin that runs a structured product-market fit validation sprint
 /pmf-sprint:pmf-sprint
 ```
 
-## What it does
+## How it works
 
-Guides a founder through 7 phases in a 2-3 hour interactive session:
+The sprint starts with a quick triage to determine your track:
 
-1. **The Basics** — Target customer, problem, advantage, competition
+| Track | You have | Sprint takes | Focus |
+|-------|----------|--------------|-------|
+| **Explorer** | 0 customers | ~60 min | Everything is a hypothesis. Validate the problem. |
+| **Validator** | 1-10 customers | ~45 min | Anchor to real customers. Find more like them. |
+| **Optimizer** | 10+ customers | ~30 min | Measure, segment, narrow. |
+
+Then guides you through 6 phases — questions, coaching, and output adapt to your stage:
+
+1. **The Basics** — Customer, problem, advantage, competition
 2. **Differentiation** — Scale ratings, 2x2 positioning, decision principles
-3. **Founding Hypothesis** — Your one-sentence bet + scorecard
-4. **PMF Measurement** — Sean Ellis test, narrowing move, improvement loop
-5. **Magic Lenses** — Visual 2x2 charts comparing approaches through Customer, Pragmatic, Growth, and Money lenses (generates interactive HTML)
-6. **Action Plan** — Concrete next actions for tomorrow, this week, and next week
-7. **Save Artifacts** — Exports a PMF Sprint doc (.md) and Magic Lenses visualization (.html)
-
-The facilitator is direct and opinionated — it pushes back on vague answers, flags untested assumptions, and won't let you skip customer conversations.
+3. **Founding Hypothesis** — One-sentence bet + scorecard
+4. **PMF Measurement** — Leading indicators / Vohra questions / Sean Ellis survey (by track)
+5. **Next Actions** — Concrete tasks for this week
+6. **Save Artifact** — Exports a PMF Sprint doc you update over time
