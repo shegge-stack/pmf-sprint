@@ -1,0 +1,8 @@
+{
+  "name": "pmf-sprint",
+  "description": "Run a shortened foundational sprint to validate product-market fit, based on the Jake Knapp model and Vohra PMF Engine.",
+  "version": "1.0.0",
+  "author": {
+    "name": "shegge-stack"
+  }
+}
