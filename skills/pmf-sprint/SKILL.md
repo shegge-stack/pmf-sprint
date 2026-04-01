@@ -143,6 +143,290 @@ Ask for 2-3 practical principles that flow from their differentiation. These gui
 
 Example: If "fast" is the edge → "If a feature adds steps, cut it."
 
+### 2.4 Generate the Positioning Report
+
+After collecting all differentiator scores and the 2x2 axes, generate an HTML positioning report. Save it to `[project-root]/pmf-positioning-[date].html` and tell the founder to `open` it.
+
+This report is the visual artifact of Phase 2. It makes the differentiation tangible and shareable with co-founders, advisors, and investors.
+
+**What to include in the report:**
+1. Header with project name, date, track, and founder name
+2. Competitive comparison table — all 7 differentiator scales with scores for the product and each competitor, color-coded (green = winning by 3+, amber = close, red = losing by 3+)
+3. The 2x2 positioning chart — the two chosen axes with the product and competitors plotted as dots. The product should be in the top-right "Winner" quadrant. If it's not, that's a finding worth highlighting.
+4. Decision principles — the 2-3 rules that flow from the differentiation
+5. Positioning summary — a short, opinionated "So what?" section that calls out the strongest advantage, the biggest vulnerability, and what to do about it
+
+**Use this HTML template:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMF Positioning — [Project Name]</title>
+<style>
+  :root {
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --text: #18181B;
+    --text-secondary: #71717A;
+    --text-tertiary: #A1A1AA;
+    --border: #E4E4E7;
+    --accent: #18181B;
+    --accent-subtle: #F4F4F5;
+    --win: #16A34A;
+    --win-bg: #F0FDF4;
+    --lose: #DC2626;
+    --lose-bg: #FEF2F2;
+    --neutral: #CA8A04;
+    --neutral-bg: #FEFCE8;
+    --dot-you: #18181B;
+    --dot-comp1: #71717A;
+    --dot-comp2: #D4D4D8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  .page { max-width: 800px; margin: 0 auto; padding: 64px 32px; }
+
+  /* Header */
+  .header { margin-bottom: 48px; }
+  .header-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+  .badge { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 4px; background: var(--accent); color: var(--surface); }
+  .badge.track { background: var(--accent-subtle); color: var(--text-secondary); }
+  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+  .header-sub { color: var(--text-secondary); font-size: 14px; margin-top: 4px; }
+
+  /* Section labels */
+  .section { margin-top: 48px; }
+  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); margin-bottom: 16px; }
+
+  /* Legend */
+  .legend { display: flex; gap: 24px; margin-bottom: 24px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
+  .legend-dot { width: 14px; height: 14px; border-radius: 3px; }
+  .legend-dot.you { background: var(--dot-you); }
+  .legend-dot.comp1 { background: var(--dot-comp1); }
+  .legend-dot.comp2 { background: var(--dot-comp2); }
+
+  /* Comparison table */
+  .comparison-table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .comparison-table thead th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); background: var(--accent-subtle); }
+  .comparison-table thead th:not(:first-child) { text-align: center; }
+  .comparison-table tbody td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .comparison-table tbody td:not(:first-child) { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .comparison-table tbody tr:last-child td { border-bottom: none; }
+  .diff-label { font-weight: 500; }
+  .diff-range { display: block; font-size: 11px; color: var(--text-tertiary); font-weight: 400; }
+  .score { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 28px; border-radius: 6px; font-size: 14px; }
+  .score.win { background: var(--win-bg); color: var(--win); }
+  .score.lose { background: var(--lose-bg); color: var(--lose); }
+  .score.neutral { background: var(--neutral-bg); color: var(--neutral); }
+  .score.base { background: var(--accent-subtle); color: var(--text); }
+  .gap-indicator { font-size: 11px; color: var(--text-tertiary); font-weight: 400; margin-top: 2px; }
+
+  /* 2x2 Chart */
+  .chart-wrapper { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 32px; }
+  .chart-title { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .chart-subtitle { font-size: 13px; color: var(--text-secondary); text-align: center; margin-bottom: 24px; }
+  .chart-container { position: relative; width: 100%; aspect-ratio: 1; background: var(--bg); border-radius: 8px; max-width: 520px; margin: 0 auto; }
+  .axis-line-v { position: absolute; left: 50%; top: 8%; height: 84%; width: 1px; background: var(--border); }
+  .axis-line-h { position: absolute; top: 50%; left: 8%; width: 84%; height: 1px; background: var(--border); }
+  .axis-label { position: absolute; font-size: 11px; font-weight: 600; color: var(--text-tertiary); }
+  .axis-label.top { top: 10px; left: 50%; transform: translateX(-50%); }
+  .axis-label.bottom { bottom: 10px; left: 50%; transform: translateX(-50%); }
+  .axis-label.left { left: 10px; top: 50%; transform: translateY(-50%); max-width: 72px; text-align: center; line-height: 1.3; }
+  .axis-label.right { right: 10px; top: 50%; transform: translateY(-50%); max-width: 72px; text-align: center; line-height: 1.3; }
+  .quadrant-hint { position: absolute; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--border); }
+  .quadrant-hint.tr { top: 12%; right: 12%; color: var(--win); opacity: 0.35; }
+  .quadrant-hint.bl { bottom: 12%; left: 12%; color: var(--lose); opacity: 0.35; }
+  .dot { position: absolute; height: 36px; padding: 0 14px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: white; transform: translate(-50%, -50%); box-shadow: 0 2px 8px rgba(0,0,0,0.12); white-space: nowrap; letter-spacing: -0.01em; }
+  .dot.you { background: var(--dot-you); }
+  .dot.comp1 { background: var(--dot-comp1); }
+  .dot.comp2 { background: var(--dot-comp2); color: var(--text-secondary); }
+
+  /* Principles */
+  .principles { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 24px 28px; }
+  .principle { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .principle:last-child { border-bottom: none; }
+  .principle-rule { font-size: 15px; font-weight: 600; }
+  .principle-why { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+
+  /* Summary */
+  .summary { background: var(--accent); color: var(--surface); border-radius: 12px; padding: 32px; }
+  .summary h2 { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+  .summary-item { margin-bottom: 16px; }
+  .summary-item:last-child { margin-bottom: 0; }
+  .summary-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.5; margin-bottom: 4px; }
+  .summary-text { font-size: 15px; line-height: 1.6; opacity: 0.9; }
+  .summary-text strong { opacity: 1; color: white; }
+  .summary-cta { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 15px; font-weight: 600; }
+
+  /* Footer */
+  .footer { text-align: center; margin-top: 48px; padding: 24px; color: var(--text-tertiary); font-size: 12px; }
+
+  @media (max-width: 640px) {
+    .page { padding: 32px 16px; }
+    .header h1 { font-size: 24px; }
+    .chart-container { max-width: 100%; }
+  }
+  @media print {
+    .page { padding: 24px; }
+    .summary { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">
+      <span class="badge">PMF Sprint</span>
+      <span class="badge track">[Track: Explorer/Validator/Optimizer]</span>
+    </div>
+    <h1>[Project Name] — Positioning</h1>
+    <p class="header-sub">[Founder Name] · [Date] · Foundation Sprint + Vohra PMF Engine</p>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot you"></div>[Your Product]</div>
+    <div class="legend-item"><div class="legend-dot comp1"></div>[Competitor 1]</div>
+    <div class="legend-item"><div class="legend-dot comp2"></div>[Competitor 2]</div>
+  </div>
+
+  <!-- COMPETITIVE COMPARISON TABLE -->
+  <div class="section">
+    <p class="section-label">Competitive Comparison</p>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Differentiator</th>
+          <th>[Your Product]</th>
+          <th>[Competitor 1]</th>
+          <th>[Competitor 2]</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--
+          Repeat this row for each of the 7 differentiators.
+          Score class logic:
+            - Compare your score vs highest competitor score for that row
+            - "win"     = you lead by 3+
+            - "neutral" = within 2
+            - "lose"    = you trail by 3+
+            - Competitors always get class "base"
+        -->
+        <tr>
+          <td>
+            <span class="diff-label">[Differentiator name]</span>
+            <span class="diff-range">[Low label] → [High label]</span>
+          </td>
+          <td><span class="score win">[X]</span></td>
+          <td><span class="score base">[X]</span></td>
+          <td><span class="score base">[X]</span></td>
+        </tr>
+        <!-- ... repeat for all 7 differentiators ... -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2x2 POSITIONING CHART -->
+  <div class="section">
+    <p class="section-label">Positioning</p>
+    <div class="chart-wrapper">
+      <div class="chart-title">[Axis 1] × [Axis 2]</div>
+      <div class="chart-subtitle">The two dimensions where [Product] wins and competitors can't follow</div>
+      <div class="chart-container">
+        <div class="axis-line-v"></div>
+        <div class="axis-line-h"></div>
+        <div class="axis-label top">[Y-axis high label]</div>
+        <div class="axis-label bottom">[Y-axis low label]</div>
+        <div class="axis-label left">[X-axis low label]</div>
+        <div class="axis-label right">[X-axis high label]</div>
+        <div class="quadrant-hint tr">WINNER</div>
+        <div class="quadrant-hint bl">LOSERVILLE</div>
+        <!--
+          Position dots using percentage. Convert 1-10 score to CSS:
+            left = 8 + (x_score - 1) * 9.33  percent
+            top  = 92 - (y_score - 1) * 9.33  percent
+          This maps score 1 → 8% and score 10 → 92% from edges.
+
+          Use short labels (product name or initial) inside dots.
+        -->
+        <div class="dot you" style="left: [x%]; top: [y%];">[Label]</div>
+        <div class="dot comp1" style="left: [x%]; top: [y%];">[Label]</div>
+        <div class="dot comp2" style="left: [x%]; top: [y%];">[Label]</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECISION PRINCIPLES -->
+  <div class="section">
+    <p class="section-label">Decision Principles</p>
+    <div class="principles">
+      <!--
+        Include 2-3 principles from the founder.
+        Each principle has a rule (the short imperative) and a why (the reasoning).
+      -->
+      <div class="principle">
+        <div class="principle-rule">"[Principle as an imperative sentence]"</div>
+        <div class="principle-why">[Why this principle flows from the differentiation]</div>
+      </div>
+      <!-- ... repeat ... -->
+    </div>
+  </div>
+
+  <!-- POSITIONING SUMMARY -->
+  <div class="section">
+    <div class="summary">
+      <h2>Positioning Summary</h2>
+      <div class="summary-item">
+        <div class="summary-label">Strongest advantage</div>
+        <div class="summary-text">[Which differentiator(s) show the biggest gap vs competition, and why it matters to the customer]</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Biggest vulnerability</div>
+        <div class="summary-text">[Where competitors are close or ahead, and whether it matters for the target customer]</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">The bet</div>
+        <div class="summary-text"><strong>"[The founding hypothesis sentence from Phase 3]"</strong></div>
+      </div>
+      <div class="summary-cta">[One direct sentence: what the founder should do next based on this positioning]</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    [Project Name] PMF Sprint · [Date] · Foundation Sprint + Vohra PMF Engine<br>
+    Frameworks: Jake Knapp & John Zeratsky (Character Capital) · Rahul Vohra (Superhuman)
+  </div>
+
+</div>
+</body>
+</html>
+```
+
+**Positioning math:** Convert a 1-10 score to CSS position:
+- `left` = `8 + (x_score - 1) * 9.33` percent
+- `top` = `92 - (y_score - 1) * 9.33` percent
+This maps score 1 → 8% from edge and score 10 → 92% from edge.
+
+**Score color logic for the comparison table:**
+- Compare the product's score to the highest competitor score for each differentiator
+- Gap of +3 or more → class `win` (green)
+- Gap of -3 or more → class `lose` (red)
+- Within 2 → class `neutral` (amber)
+- Competitor scores always use class `base` (neutral gray)
+
+**Content rules:**
+- Use the product's actual name in dot labels, not "A/B/C" — makes it instantly readable
+- Chart subtitle should reference the specific customer and why these axes matter to them
+- Positioning summary must be opinionated — call out risks, don't just describe
+- If the product is NOT in the top-right quadrant, say so directly in the summary. That's the most valuable finding.
+
 ### Output: Mini Manifesto
 ```
 MINI MANIFESTO
@@ -154,6 +438,8 @@ Principles:
 2. [principle]
 3. [principle]
 ```
+
+Also save the positioning report to `[project-root]/pmf-positioning-[date].html` and tell the founder to run `open pmf-positioning-[date].html`.
 
 ---
 
@@ -265,10 +551,11 @@ NEXT ACTIONS [Track] — Week of [date]
 
 ---
 
-## Phase 6: Save the Artifact
+## Phase 6: Save the Artifacts
 
-Save the sprint output to: `[project-root]/PMF-SPRINT-[date].md`
+Save two files:
 
+**1. PMF Sprint Document** → `[project-root]/PMF-SPRINT-[date].md`
 Include:
 - Track assignment and triage answers
 - The Basics Card
@@ -278,7 +565,13 @@ Include:
 - Action Plan
 - A "Revisit by [date 4 weeks out]" reminder at the bottom
 
-Tell the founder this is a living document — update it as they validate assumptions and check off scorecard boxes.
+**2. Positioning Report** → `[project-root]/pmf-positioning-[date].html`
+The visual artifact from Phase 2 — competitive comparison table, 2x2 chart, decision principles, and positioning summary. Already generated during Phase 2.
+
+Tell the founder:
+- The markdown doc is a living document — update it as you validate assumptions
+- The positioning report is shareable — send it to co-founders, advisors, or investors
+- Run `open pmf-positioning-[date].html` to view in browser
 
 ---
 
