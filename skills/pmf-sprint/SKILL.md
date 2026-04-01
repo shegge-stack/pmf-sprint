@@ -21,24 +21,36 @@ When invoked, ask for the **project name** (or use arguments if provided), then 
 
 ## Phase 0: Triage
 
-Ask these four questions upfront to determine the founder's track:
+Ask these questions upfront to determine the founder's track:
 
 1. **Product status?** — Idea only / Prototype / Live product
 2. **Paying customers?** — 0 / 1-10 / 10-100 / 100+
 3. **Have you talked to potential/actual customers about this problem?** — No / A few / Regularly
 4. **What's your biggest question right now?** — (Open-ended, reveals what they're stuck on)
 
+If they answer 1-10 customers, ask one more:
+
+5. **Do your existing customers clearly represent the market you want to pursue, or could the real opportunity be in a different segment entirely?** — "These customers ARE my market" / "I'm not sure — there might be bigger opportunities elsewhere" / "I have multiple possible markets I could serve"
+
 ### Assign a track:
 
 | Track | Profile | Sprint focus |
 |-------|---------|--------------|
 | **Explorer** | 0 customers, idea or prototype | Everything is a hypothesis. Focus on customer discovery. |
-| **Validator** | 1-10 customers, some signal | Anchor to real customers. Find more like them. |
+| **Validator-Explore** | 1-10 customers, but unclear ICP or multiple possible markets | Your early customers are data, not destiny. Explore the TAM before narrowing. |
+| **Validator-Narrow** | 1-10 customers, clear pattern in who they are | Anchor to real customers. Find more like them. |
 | **Optimizer** | 10+ customers, real revenue | You know the basics. Measure, segment, narrow. |
+
+**How to assign Validator sub-tracks:**
+- If they say "I'm not sure" or mention multiple possible markets → **Validator-Explore**
+- If they describe a coherent customer profile across their customers → **Validator-Narrow**
+- If their biggest question is about ICP, market selection, or "where to focus" → **Validator-Explore** regardless of what they said about customers
+- When in doubt, default to **Validator-Explore**. Narrowing too early on a sample of 1-5 customers is a more dangerous mistake than exploring too long.
 
 Tell the founder their track and what the sprint will focus on. Set time expectation:
 - Explorer: ~60 min
-- Validator: ~45 min
+- Validator-Explore: ~60 min (the market comparison takes time but saves months of going in the wrong direction)
+- Validator-Narrow: ~45 min
 - Optimizer: ~30 min
 
 ---
@@ -50,7 +62,8 @@ Adapt the core questions based on track.
 ### 1.1 Target Customer
 
 **Explorer:** "Describe the person you think needs this. Be specific — a real person, not a segment."
-**Validator:** "Describe your best existing customer. What do your paying customers have in common?"
+**Validator-Explore:** "Tell me about your existing customers first — who are they and why did they buy? But don't anchor yet. We're going to use them as clues, not conclusions."
+**Validator-Narrow:** "Describe your best existing customer. What do your paying customers have in common?"
 **Optimizer:** "Segment your customers. Which cohort has the highest retention or engagement? Describe that person."
 
 Push for in all tracks:
@@ -60,12 +73,14 @@ Push for in all tracks:
 
 Rules:
 - "Busy professionals" → push back. Which ones?
-- Validator/Optimizer: if they can't describe their actual customers specifically, that's the first red flag.
+- Validator-Narrow/Optimizer: if they can't describe their actual customers specifically, that's the first red flag.
+- Validator-Explore: explicitly tell them "Your 2 customers are data points, not proof. They might be your ideal market — or they might be accidents. We'll figure out which."
 
 ### 1.2 Important Problem
 
 **Explorer:** "What problem are you betting causes enough pain to pay for a solution?"
-**Validator:** "Why did your customers actually buy? What problem were they solving? Ask them if you haven't."
+**Validator-Explore:** "What's the underlying problem your product solves? Not the specific use case your current customers have — the deeper capability. What does your product actually DO that creates value?"
+**Validator-Narrow:** "Why did your customers actually buy? What problem were they solving? Ask them if you haven't."
 **Optimizer:** "What do your best customers say the main benefit is? Does it match what you think?"
 
 Push for:
@@ -76,6 +91,7 @@ Push for:
 Rules:
 - If "do nothing" is realistic, flag it.
 - Explorer: tag every answer [UNTESTED] or [VALIDATED] based on whether they've heard it from real people.
+- Validator-Explore: separate the **core capability** from the **current use case**. The capability is what transfers across markets. The use case might be specific to their first 2 customers.
 
 ### 1.3 Advantage
 
@@ -89,11 +105,13 @@ Three components (all tracks):
 Rules:
 - "AI" is not an advantage. What's your *specific* AI advantage?
 - "First mover" is almost never real. Push back.
+- Validator-Explore: pay special attention to capability — which markets does this capability transfer to? A team that can build coding agents might also be able to build compliance agents, QA agents, or data pipeline agents. The capability defines the opportunity space.
 
 ### 1.4 Competitors
 
 **Explorer:** "What options does the customer have today? Include workarounds."
-**Validator/Optimizer:** "What did your customers use before you? Why did they switch?"
+**Validator-Explore:** "For your current customers, what did they use before? We'll map competitors per segment in the next phase."
+**Validator-Narrow/Optimizer:** "What did your customers use before you? Why did they switch?"
 
 Map:
 - **800-lb gorilla**: Dominant solution (spreadsheets count)
@@ -102,13 +120,205 @@ Map:
 
 ### Output: The Basics Card
 ```
-THE BASICS [Track: Explorer/Validator/Optimizer]
+THE BASICS [Track: Explorer/Validator-Explore/Validator-Narrow/Optimizer]
 Customer:    [specific person description]
 Problem:     [the painful problem]
+Core capability: [what the product actually does — Validator-Explore only]
 Advantage:   Capability: [X] | Insight: [Y] | Motivation: [Z]
 Competition: 800-lb gorilla: [X] | Alternatives: [Y, Z]
 Evidence:    [VALIDATED: what's confirmed] [UNTESTED: what's assumed]
 ```
+
+---
+
+## Phase 1.5: Market Comparison (Validator-Explore only)
+
+**Skip this phase for Explorer, Validator-Narrow, and Optimizer tracks.**
+
+This is the most important phase for a Validator-Explore founder. Before narrowing on differentiation and positioning, they need to step back and compare the candidate markets their product could serve. The goal is to prevent premature commitment to a market that happened to produce the first 2 customers but isn't the best long-term bet.
+
+### 1.5.1 Identify Candidate Segments
+
+Ask: **"Your product's core capability is [capability from Phase 1]. What are all the markets or customer segments that could use this? Let's brainstorm — include your current customers' market AND any others you've considered or been told about."**
+
+Push for 3-6 specific segments. Not "enterprise" — that's a size, not a market. Specific verticals or use cases: "B2B SaaS companies automating customer onboarding," "healthcare compliance teams managing audit prep," "FinServ ops teams reconciling transactions."
+
+If they struggle, prompt with:
+- "Who else has the same underlying problem but in a different industry?"
+- "Where else is [the workaround they described] being used and hated?"
+- "If you pitched this to a completely different industry, who would get it instantly?"
+
+Include their current market as one of the candidates — don't assume it's wrong, but don't assume it's right either.
+
+### 1.5.2 Score Each Segment
+
+For each candidate segment, ask the founder to score on a 1-10 scale:
+
+| Criteria | What it measures | What to push on |
+|----------|------------------|-----------------|
+| **Problem intensity** | How painful is this problem in this segment? | "Would they stop what they're doing to take a demo this week?" |
+| **Willingness to pay** | Budget exists and is accessible? | "Is this a line item they already spend on, or a new budget category?" |
+| **Your right to win** | Do you have a unique advantage in this segment? | "Why would you beat a competitor who focuses only on this vertical?" |
+| **Market size** | How many potential customers exist? | "Order of magnitude — hundreds, thousands, tens of thousands?" |
+| **Ease of access** | Can you reach and sell to these people? | "Do you know how to find them? Do you have warm intros? Can you cold outreach?" |
+| **Speed to learn** | How fast can you validate this segment? | "Could you have 5 conversations this month, or would it take 6 months to get a meeting?" |
+
+Rules:
+- The founder scores each segment. Then you challenge any score that seems inflated or deflated.
+- Their current market (where the 2 customers are) gets scored honestly — no bias for or against.
+- If they score a segment high on everything, push back: "What's the catch? Why hasn't someone else already won here?"
+- If they score their current market low but resist exploring alternatives, name it: "You're describing a mediocre market but anchoring to it because it's familiar. That's a trap."
+
+### 1.5.3 Identify the Top 2
+
+After scoring, rank the segments by total score. Then ask:
+
+**"Looking at these scores, which 2 segments would you bet on if you could only pick 2 to explore over the next 4 weeks?"**
+
+The answer doesn't have to match the highest scores — intuition matters. But if they pick a segment that scored low, make them articulate why. And if they avoid a high-scoring segment, ask what's holding them back.
+
+### 1.5.4 Generate the Market Comparison Report
+
+Generate an HTML report showing the segment comparison. Save it to `[project-root]/pmf-markets-[date].html` and tell the founder to `open` it.
+
+**Use the same design system as the positioning report** (same CSS variables, typography, layout patterns). The report should include:
+
+1. **Header** with project name, date, track badge ("Validator-Explore"), founder name
+2. **Segment comparison table** — rows are the 6 criteria, columns are each candidate segment. Color-code scores: green (8-10), amber (5-7), red (1-4). Include a total row.
+3. **Top 2 segments highlighted** — visually distinguish the chosen segments
+4. **For each top segment, a mini-brief:**
+   - Who is the customer in this segment? (specific person)
+   - What's the problem in this segment?
+   - Who is the competition in this segment?
+   - What's your right to win here specifically?
+   - What would you need to learn first?
+5. **Exploration plan** — for each top segment, 2-3 concrete steps to validate it (who to talk to, where to find them, what to ask)
+6. **Decision criteria** — "After 4 weeks of exploration, you'll commit to one segment if you see [X]. You'll walk away if you see [Y]."
+
+**Segment comparison table HTML structure** (follows the same design system as the positioning report):
+
+```html
+<!-- Insert inside the .page div, using the same CSS variables and classes -->
+
+<!-- SEGMENT COMPARISON TABLE -->
+<div class="section">
+  <p class="section-label">Market Comparison</p>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Criteria</th>
+        <!-- One column per segment. Highlight top 2 with a subtle background -->
+        <th class="[top-pick]">[Segment 1]</th>
+        <th class="[top-pick]">[Segment 2]</th>
+        <th>[Segment 3]</th>
+        <th>[Segment 4]</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--
+        Repeat for each of the 6 criteria.
+        Score class logic:
+          - 8-10 → class "win" (green)
+          - 5-7  → class "neutral" (amber)
+          - 1-4  → class "lose" (red)
+      -->
+      <tr>
+        <td>
+          <span class="diff-label">[Criteria name]</span>
+          <span class="diff-range">[What it measures]</span>
+        </td>
+        <td><span class="score win">[X]</span></td>
+        <td><span class="score neutral">[X]</span></td>
+        <td><span class="score lose">[X]</span></td>
+        <td><span class="score neutral">[X]</span></td>
+      </tr>
+      <!-- ... repeat for all 6 criteria ... -->
+      <!-- Total row -->
+      <tr style="font-weight: 700; border-top: 2px solid var(--border);">
+        <td><span class="diff-label">Total</span></td>
+        <td><span class="score base">[sum]</span></td>
+        <td><span class="score base">[sum]</span></td>
+        <td><span class="score base">[sum]</span></td>
+        <td><span class="score base">[sum]</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- TOP SEGMENT BRIEFS -->
+<div class="section">
+  <p class="section-label">Top Segments to Explore</p>
+  <!-- Repeat for each top segment -->
+  <div class="chart-wrapper" style="margin-bottom: 16px;">
+    <div class="chart-title">[Segment Name]</div>
+    <div class="chart-subtitle">Score: [X]/60 · [One-line why this segment is promising]</div>
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-rule">Customer</div>
+        <div class="principle-why">[Specific person description in this segment]</div>
+      </div>
+      <div class="principle">
+        <div class="principle-rule">Problem</div>
+        <div class="principle-why">[The pain in this specific segment]</div>
+      </div>
+      <div class="principle">
+        <div class="principle-rule">Competition</div>
+        <div class="principle-why">[Who they'd compete with in this segment]</div>
+      </div>
+      <div class="principle">
+        <div class="principle-rule">Right to win</div>
+        <div class="principle-why">[Why they have an edge here specifically]</div>
+      </div>
+      <div class="principle">
+        <div class="principle-rule">First thing to learn</div>
+        <div class="principle-why">[The biggest unknown to validate]</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DECISION CRITERIA -->
+<div class="section">
+  <div class="summary">
+    <h2>Exploration Plan</h2>
+    <div class="summary-item">
+      <div class="summary-label">Timeline</div>
+      <div class="summary-text">4 weeks of parallel exploration — then commit to one segment.</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-label">Commit signal</div>
+      <div class="summary-text"><strong>[What they need to see to commit — e.g., "3 out of 5 prospects in this segment describe the pain unprompted and ask about pricing"]</strong></div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-label">Walk-away signal</div>
+      <div class="summary-text">[What would tell them this segment isn't it — e.g., "Can't get meetings, no budget authority, problem isn't painful enough to switch"]</div>
+    </div>
+    <div class="summary-cta">[Direct advice: which segment to start with and why]</div>
+  </div>
+</div>
+```
+
+### Output: Market Comparison Card
+```
+MARKET COMPARISON [Validator-Explore]
+Core capability:     [what transfers across markets]
+Segments evaluated:  [list all 3-6]
+Top 2 to explore:    [segment A] (score: X/60) | [segment B] (score: Y/60)
+Current market:      [segment where existing customers are] (score: Z/60)
+Commit by:           [date 4 weeks out]
+Commit signal:       [what they need to see]
+Walk-away signal:    [what tells them to move on]
+```
+
+### How this changes the rest of the sprint for Validator-Explore
+
+After Phase 1.5, the remaining phases run **for the top-scoring segment**, not for the current customer base. This is critical:
+- Phase 2 (Differentiation): Rate against competitors in the top segment, not the current one
+- Phase 3 (Founding Hypothesis): Write the hypothesis for the top segment
+- Phase 4 (Measurement): Define leading indicators for the top segment
+- Phase 5 (Actions): All actions are about exploring the top segment
+
+If the current market scored highest, that's fine — the sprint confirms the direction. But the founder made that choice with data, not inertia.
 
 ---
 
@@ -125,7 +335,8 @@ Manual ←→ Automatic  |  Generic ←→ Personalized
 ```
 
 **Explorer:** Rate based on what you're planning to build.
-**Validator/Optimizer:** Rate based on what customers actually experience today.
+**Validator-Explore:** Rate for the top segment chosen in Phase 1.5 — based on what you know or can reasonably estimate about that market.
+**Validator-Narrow/Optimizer:** Rate based on what customers actually experience today.
 
 If they're in the same spot as competitors on most scales — say so. No differentiation yet.
 
@@ -465,7 +676,10 @@ FOUNDING HYPOTHESIS SCORECARD
 [ ] Does it click?         — When you describe it, do their eyes light up?
 ```
 
-**Validator** (some boxes should be checkable from existing customers):
+**Validator-Explore** (most boxes unchecked for the new segment — that's expected and correct):
+The hypothesis is written for the top segment from Phase 1.5, which may be different from where their current customers are. Most boxes will be unchecked because they haven't validated in this segment yet. Each unchecked box becomes a specific conversation to have during the 4-week exploration.
+
+**Validator-Narrow** (some boxes should be checkable from existing customers):
 Check boxes based on what they've learned from their 1-10 customers. For each unchecked box, that's a specific question to ask their next customer conversation.
 
 **Optimizer** (most boxes should be checked — if not, flag the gap):
@@ -487,7 +701,25 @@ Help them define 3 concrete signals, e.g.:
 - "3 out of 5 interview subjects say they'd pay for this"
 - "1 person offers to pay before the product exists"
 
-### Validator (1-10 customers)
+### Validator-Explore (1-10 customers, exploring new segments)
+Two measurement tracks running in parallel:
+
+**For existing customers** — Use Vohra's questions as 1:1 conversations:
+1. "How would you feel if you could no longer use [product]?"
+2. "Who do you think this is best for?"
+3. "What's the main benefit for you?"
+4. "How could we improve?"
+
+These answers become baseline data. If existing customers say "this is best for [segment X]" and segment X matches your top segment from Phase 1.5 — strong signal.
+
+**For the top segment** — Define exploration milestones:
+- Week 1-2: Have 5 discovery conversations. Do they describe the pain unprompted?
+- Week 3-4: Show the product or a mockup. Do they lean in or politely nod?
+- End of week 4: Could you close 1-2 pilots in this segment?
+
+Ask: **"Have you asked your existing customers the Vohra questions? And have you talked to anyone in [top segment] yet?"**
+
+### Validator-Narrow (1-10 customers, clear pattern)
 Too few for a statistically valid survey. Use Vohra's questions as **1:1 conversation starters** with each customer:
 
 1. "How would you feel if you could no longer use [product]?"
@@ -510,9 +742,10 @@ Run the full engine:
 ### Output: Measurement Plan
 ```
 PMF MEASUREMENT PLAN [Track]
-Explorer:  Leading indicators: [signal 1] [signal 2] [signal 3]
-Validator: Vohra questions asked: [yes/no] | Key finding: [X]
-Optimizer: Sean Ellis score: [X%] | Target segment: [Y] | Next survey: [date]
+Explorer:          Leading indicators: [signal 1] [signal 2] [signal 3]
+Validator-Explore: Existing customers: Vohra asked [yes/no] | Top segment: [X] | Exploration milestones: [week 1-2] [week 3-4] | Commit by: [date]
+Validator-Narrow:  Vohra questions asked: [yes/no] | Key finding: [X]
+Optimizer:         Sean Ellis score: [X%] | Target segment: [Y] | Next survey: [date]
 ```
 
 ---
@@ -531,7 +764,13 @@ Rules for all tracks:
 - Validating the problem exists (not the solution)
 - Getting to first "shut up and take my money" signal
 
-### Validator actions focus on:
+### Validator-Explore actions focus on:
+- Asking existing customers the Vohra questions (baseline data)
+- Scheduling 5 discovery conversations in the top segment from Phase 1.5 (where to find them, what to ask, what to listen for)
+- Defining the commit/walk-away signals for week 4
+- NOT building features for the new segment yet — conversations first
+
+### Validator-Narrow actions focus on:
 - Deep-diving existing customers (ask the Vohra questions)
 - Finding 5-10 more people who look like the best customer
 - Identifying what the best customers have in common that others don't
@@ -553,12 +792,13 @@ NEXT ACTIONS [Track] — Week of [date]
 
 ## Phase 6: Save the Artifacts
 
-Save two files:
+Save these files:
 
 **1. PMF Sprint Document** → `[project-root]/PMF-SPRINT-[date].md`
 Include:
 - Track assignment and triage answers
 - The Basics Card
+- Market Comparison Card (Validator-Explore only)
 - Mini Manifesto
 - Founding Hypothesis + Scorecard
 - Measurement Plan
@@ -568,10 +808,14 @@ Include:
 **2. Positioning Report** → `[project-root]/pmf-positioning-[date].html`
 The visual artifact from Phase 2 — competitive comparison table, 2x2 chart, decision principles, and positioning summary. Already generated during Phase 2.
 
+**3. Market Comparison Report** (Validator-Explore only) → `[project-root]/pmf-markets-[date].html`
+The visual artifact from Phase 1.5 — segment scoring table, top segment briefs, and exploration plan. Already generated during Phase 1.5.
+
 Tell the founder:
 - The markdown doc is a living document — update it as you validate assumptions
-- The positioning report is shareable — send it to co-founders, advisors, or investors
-- Run `open pmf-positioning-[date].html` to view in browser
+- The reports are shareable — send to co-founders, advisors, or investors
+- Run `open pmf-positioning-[date].html` or `open pmf-markets-[date].html` to view in browser
+- Validator-Explore: revisit the market comparison in 4 weeks with real data from exploration
 
 ---
 
